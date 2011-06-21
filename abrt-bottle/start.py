@@ -6,8 +6,9 @@ import xml.dom.minidom
 import requests
 
 #data contains following variables
-#headers: dictionary that is sent with each requests' request as headers
-#server: url to the server (with port)
+    #headers: dictionary that is sent with each requests' request as headers
+    #server: url to the server (with port)
+    #path: directory where static files are stored
 import data
 
 def fetch_data(url):
