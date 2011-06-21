@@ -16,7 +16,10 @@ def fetch_data(url):
     Download and create xml tree from given url.
     Returns dom or None.
     """
-    resp = requests.get(url, headers=data.headers)
+    try:
+        resp = requests.get(url, headers=data.headers)
+    except:
+        return None
 
     if resp.status_code is 200:
         return xml.dom.minidom.parseString(resp.content)
