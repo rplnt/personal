@@ -1,6 +1,6 @@
 '''
-My submission to codegolf challenge. The task was to create shortest possible
-program in language of choice that would count days between two days without
+My submission to the codegolf challenge. The task was to create a shortest possible
+program in a language of choice that would count days between two dates without
 using any date/time libraries.
 '''
 import re
