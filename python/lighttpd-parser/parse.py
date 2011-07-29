@@ -15,6 +15,12 @@ def day_index(time):
     return time.hour*2 + (1 if time.minute-30>0 else 0)
 
 
+def print_statline(date, visitor_count, traffic_list, separator='\t'):
+    day = date.strftime(io_format)
+    to_print = [day, str(visitor_count)] + map(str, traffic_list)
+    print separator.join(to_print)
+
+
 def create_stats(startdate, stopdate, handle):
     first = True
     traffic = [0]*48
@@ -30,23 +36,22 @@ def create_stats(startdate, stopdate, handle):
             continue
         if first:
             first = False
-            old_date = (current_time.year, current_time.month, current_time.day)
+            old_date = current_time
         if result.group(1) not in visitors:
             visitors[result.group(1)] = 1
         if result.group(3) != '-':
             traffic[day_index(current_time)] += int(result.group(3))
 
-        if current_time.day != old_date[2] or current_time.month != old_date[1] or current_time.year != old_date[0]:
-            print datetime.datetime(old_date[0],old_date[1],old_date[2]).strftime(io_format)+'\t',
-            print '%s\t' % len(visitors.keys()),
-            for item in traffic:
-                print '%s\t' % item,
-            print
+        if current_time.date() != old_date.date():
+            print_statline(old_date, len(visitors.keys()), traffic)
             if current_time >= stopdate:
                 return
             traffic = [0]*48
             visitors = {}
-            old_date = (current_time.year, current_time.month, current_time.day)
+            old_date = current_time
+
+    if current_time.date() == old_date.date():
+        print_statline(old_date, len(visitors.keys()), traffic)
 
 
 if __name__ == '__main__':
