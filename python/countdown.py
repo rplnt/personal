@@ -25,9 +25,8 @@ def num_to_key(numbers):
 
 def naive(numbers, target):
     numbers.sort()
-    if len(numbers) == 1 and numbers[0]:
-        if numbers[0] != target:
-            return False
+    if len(numbers) == 1 and numbers[0] != target:
+        return False
 
     global COUNT
     COUNT += 1
